@@ -5,14 +5,12 @@ public:
 Texture2D color;
 float x,y;
 
-void renk(Texture2D color)
+Ball(Texture2D color)
 {
     this->color = color;
 }
 void draw(float x,float y){
    DrawTexture(color,x,y,WHITE);
 }
-
-
 
 };
