@@ -33,6 +33,7 @@ int points=0;
 int windowWidth = 800;
 int windowHeight = 480;
 bool startanim = false;
+
 //*************************************************************************************
 //close window button 
 void close_window(Texture2D exit,int  x_exit , int32_t  y_exit);
@@ -49,7 +50,7 @@ void score(int x,int y);
 //we here scroll down the matrix
 void Scroll_down(int y_scroll);
 //we here create end function
-void EndScreen(int points,int x,int y);
+void EndScreen(int points,int x,int y,Texture2D endmenu);
 //RESET the game
 void Reset();
 
@@ -101,6 +102,7 @@ int main(void)
     Texture2D t3 = LoadTexture("t3.png");
     Texture2D Background = LoadTexture("Background.png");
     Sound babu = LoadSound("babu.wav"); 
+    Texture2D endmenu= LoadTexture("menbackground.png");
  //*******************************************************************************     
   //here we difeind the objects
     Ball ball(t1);
@@ -171,7 +173,7 @@ int main(void)
  //----------------------------------------------------------------------------------
  //scroll down 
 
-      if(points%10==0 && points!=0 )
+      if(points%3==0 && points!=0 )
       { 
         if(lastScrollDownScore != points )
         {
@@ -208,7 +210,7 @@ int main(void)
 
     close_window(exit,x_exit,y_exit);
       
-  EndScreen(points,x_exit,y_exit);
+  EndScreen(points,x_exit,y_exit,endmenu);
  //*************************************************************************************************
 //here is the  end of everthing BYE ;)
         EndDrawing();
@@ -496,7 +498,7 @@ void Scroll_down(int y_scroll)
 
 
 
-void EndScreen(int points,int x,int y)
+void EndScreen(int points,int x,int y,Texture2D endmenu)
 {
            bool control = false;
          for(int i = 0; i<=20 ; i++)
@@ -504,7 +506,7 @@ void EndScreen(int points,int x,int y)
            if(balls_matrix[i][10]>0)
            {
                balls_matrix[10][11]=0;
-              DrawRectangle(240,120,300,300,SKYBLUE);
+              DrawTexture(endmenu,0,0,WHITE);
             DrawText(TextFormat("Score: %.3i", points),260,290, 20, BEIGE);
            DrawText(TextFormat("thx for support", points),260,160, 20, RED);
            DrawText(TextFormat("SEFA,SELiM", points),260,200, 20, RED);
